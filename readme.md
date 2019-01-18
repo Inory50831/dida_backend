@@ -1,9 +1,7 @@
+[![Build Status](https://travis-ci.org/Inory50831/dida_backend.svg?branch=master)](https://travis-ci.org/Inory50831/dida_backend)
+
+
 # readme
 
-## testing
-
-## 赵敏
-
-## lheng123
-
+测试完毕
 
