@@ -11,3 +11,7 @@ script:
   - mvn clean package -DskipTests=true
 
 install: mvn install -DskipTests=true -Dmaven.javadoc.skip=true
+
+notifications:
+
+webhooks: https://outlook.office.com/webhook/0837c3b8-b87f-4a0d-8d58-01e88f38ad20@8214a119-9891-4b5a-b566-e8224ca818a8/TravisCI/9e5b1ed715484f7581cad546c494ef83/cf9df690-8be8-4553-85dc-eb12d853c825
