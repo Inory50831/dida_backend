@@ -3,9 +3,4 @@
 
 # readme
 
-三次测试完毕
-
-<<<<<<< Updated upstream
-=======
-##
->>>>>>> Stashed changes
+## DidaStudy
