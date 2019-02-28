@@ -2,12 +2,12 @@ package didastudy.entity;
 
 import java.util.Date;
 
-public class NucDidaUserrole {
+public class NucDidaRolePermission {
     private Long id;
 
-    private Long userId;
+    private Long rId;
 
-    private Long roleId;
+    private Long pId;
 
     private Date gmtCreate;
 
@@ -21,20 +21,20 @@ public class NucDidaUserrole {
         this.id = id;
     }
 
-    public Long getUserId() {
-        return userId;
+    public Long getrId() {
+        return rId;
     }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
+    public void setrId(Long rId) {
+        this.rId = rId;
     }
 
-    public Long getRoleId() {
-        return roleId;
+    public Long getpId() {
+        return pId;
     }
 
-    public void setRoleId(Long roleId) {
-        this.roleId = roleId;
+    public void setpId(Long pId) {
+        this.pId = pId;
     }
 
     public Date getGmtCreate() {

@@ -11,19 +11,21 @@
     <result column="gmt_modified" property="gmtModified" jdbcType="TIMESTAMP" />
     <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP" />
     <result column="top" property="top" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="SMALLINT" />
   </resultMap>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
     delete from nuc_dida_blog
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="didastudy.entity.NucDidaBlog" >
+  <insert id="insert" parameterType="didastudy.entity.NucDidaBlog" useGeneratedKeys="true" keyProperty="id">
     insert into nuc_dida_blog (id, title, content, 
       user_id, tag_id, collected_num, 
-      gmt_modified, gmt_create, top
+      gmt_modified, gmt_create, top, status
       )
     values (#{id,jdbcType=BIGINT}, #{title,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, 
       #{userId,jdbcType=BIGINT}, #{tagId,jdbcType=BIGINT}, #{collectedNum,jdbcType=INTEGER}, 
-      #{gmtModified,jdbcType=TIMESTAMP}, #{gmtCreate,jdbcType=TIMESTAMP}, #{top,jdbcType=INTEGER}
+      #{gmtModified,jdbcType=TIMESTAMP}, #{gmtCreate,jdbcType=TIMESTAMP}, #{top,jdbcType=INTEGER},
+      #{status,jdbcType=SMALLINT}
       )
   </insert>
   <update id="updateByPrimaryKey" parameterType="didastudy.entity.NucDidaBlog" >
@@ -35,18 +37,31 @@
       collected_num = #{collectedNum,jdbcType=INTEGER},
       gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
       gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
-      top = #{top,jdbcType=INTEGER}
+      top = #{top,jdbcType=INTEGER},
+      status = #{status,jdbcType=SMALLINT}
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+  <select id="selectById" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select id, title, content, user_id, tag_id, collected_num, gmt_modified, gmt_create, 
-    top
+    top, status
     from nuc_dida_blog
     where id = #{id,jdbcType=BIGINT}
   </select>
+  <select id="selectByUserId" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select id, title, content, user_id, tag_id, collected_num, gmt_modified, gmt_create,
+    top, status
+    from nuc_dida_blog
+    where user_id = #{user_id,jdbcType=BIGINT}
+  </select>
+  <select id="selectByTitle" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select id, title, content, user_id, tag_id, collected_num, gmt_modified, gmt_create,
+    top, status
+    from nuc_dida_blog
+    where title like CONCAT(CONCAT('%', #{title,jdbcType=VARCHAR}), '%')
+  </select>
   <select id="selectAll" resultMap="BaseResultMap" >
     select id, title, content, user_id, tag_id, collected_num, gmt_modified, gmt_create, 
-    top
+    top, status
     from nuc_dida_blog
   </select>
 </mapper>

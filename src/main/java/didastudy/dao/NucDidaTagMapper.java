@@ -8,7 +8,9 @@ public interface NucDidaTagMapper {
 
     int insert(NucDidaTag record);
 
-    NucDidaTag selectByPrimaryKey(Long id);
+    NucDidaTag selectById(Long id);
+
+    NucDidaTag selectByName(String name);
 
     List<NucDidaTag> selectAll();
 

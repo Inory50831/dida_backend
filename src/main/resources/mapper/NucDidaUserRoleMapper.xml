@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="didastudy.dao.NucDidaUserRoleMapper" >
+  <resultMap id="BaseResultMap" type="didastudy.entity.NucDidaUserRole" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="u_id" property="uId" jdbcType="BIGINT" />
+    <result column="r_id" property="rId" jdbcType="BIGINT" />
+    <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP" />
+    <result column="gmt_modified" property="gmtModified" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from nuc_dida_user_role
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="didastudy.entity.NucDidaUserRole" >
+    insert into nuc_dida_user_role (id, u_id, r_id, gmt_create, 
+      gmt_modified)
+    values (#{id,jdbcType=BIGINT}, #{uId,jdbcType=BIGINT}, #{rId,jdbcType=BIGINT}, #{gmtCreate,jdbcType=TIMESTAMP}, 
+      #{gmtModified,jdbcType=TIMESTAMP})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="didastudy.entity.NucDidaUserRole" >
+    update nuc_dida_user_role
+    set u_id = #{uId,jdbcType=BIGINT},
+      r_id = #{rId,jdbcType=BIGINT},
+      gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      gmt_modified = #{gmtModified,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select id, u_id, r_id, gmt_create, gmt_modified
+    from nuc_dida_user_role
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select id, u_id, r_id, gmt_create, gmt_modified
+    from nuc_dida_user_role
+  </select>
+</mapper>

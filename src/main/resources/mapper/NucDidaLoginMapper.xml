@@ -7,6 +7,7 @@
     <result column="password" property="password" jdbcType="VARCHAR" />
     <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP" />
     <result column="gmt_modified" property="gmtModified" jdbcType="TIMESTAMP" />
+    <result column="salt" property="salt" jdbcType="VARCHAR" />
   </resultMap>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
     delete from nuc_dida_login
@@ -14,25 +15,31 @@
   </delete>
   <insert id="insert" parameterType="didastudy.entity.NucDidaLogin" >
     insert into nuc_dida_login (id, number, password, 
-      gmt_create, gmt_modified)
+      gmt_create, gmt_modified, salt)
     values (#{id,jdbcType=BIGINT}, #{number,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
-      #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP})
+      #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP}, #{salt,jdbcType=VARCHAR})
   </insert>
   <update id="updateByPrimaryKey" parameterType="didastudy.entity.NucDidaLogin" >
     update nuc_dida_login
     set number = #{number,jdbcType=VARCHAR},
       password = #{password,jdbcType=VARCHAR},
       gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
-      gmt_modified = #{gmtModified,jdbcType=TIMESTAMP}
+      gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+      salt = #{salt,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
-    select id, number, password, gmt_create, gmt_modified
+    select id, number, password, gmt_create, gmt_modified, salt
     from nuc_dida_login
     where id = #{id,jdbcType=BIGINT}
   </select>
+  <select id="selectByNumber" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select id, number, password, gmt_create, gmt_modified, salt
+    from nuc_dida_login
+    where number = #{number,jdbcType=VARCHAR}
+  </select>
   <select id="selectAll" resultMap="BaseResultMap" >
-    select id, number, password, gmt_create, gmt_modified
+    select id, number, password, gmt_create, gmt_modified, salt
     from nuc_dida_login
   </select>
 </mapper>

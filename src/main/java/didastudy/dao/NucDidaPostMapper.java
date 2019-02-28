@@ -8,7 +8,11 @@ public interface NucDidaPostMapper {
 
     int insert(NucDidaPost record);
 
-    NucDidaPost selectByPrimaryKey(Long id);
+    NucDidaPost selectById(Long id);
+
+    NucDidaPost selectByUserId(Long userId);
+
+    NucDidaPost selectByTitle(String title);
 
     List<NucDidaPost> selectAll();
 

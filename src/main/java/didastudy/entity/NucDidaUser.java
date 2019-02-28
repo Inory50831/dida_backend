@@ -1,14 +1,25 @@
 package didastudy.entity;
 
+import org.hibernate.validator.constraints.Length;
+
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 import java.util.Date;
+import java.util.List;
 
 public class NucDidaUser {
+
     private Long id;
 
+    @NotBlank(message = "学号或教工号不能为空")
     private String number;
 
+    @NotBlank(message = "手机号不能为空")
+    @Pattern(regexp = "^1[34578]{1}\\d{9}", message = "手机号格式有误")
     private String phone;
 
+    @NotBlank(message = "姓名不能为空")
+    @Length(min = 2, max = 4, message = "姓名长度必须在3-5之间")
     private String name;
 
     private String college;
@@ -26,6 +37,9 @@ public class NucDidaUser {
     private String qq;
 
     private Integer type;
+
+
+    private List<NucDidaRole> roles;
 
     private Date gmtCreate;
 
@@ -125,6 +139,14 @@ public class NucDidaUser {
 
     public void setType(Integer type) {
         this.type = type;
+    }
+
+    public List<NucDidaRole> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<NucDidaRole> roles) {
+        this.roles = roles;
     }
 
     public Date getGmtCreate() {

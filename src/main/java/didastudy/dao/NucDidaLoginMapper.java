@@ -10,6 +10,8 @@ public interface NucDidaLoginMapper {
 
     NucDidaLogin selectByPrimaryKey(Long id);
 
+    NucDidaLogin selectByNumber(String number);
+
     List<NucDidaLogin> selectAll();
 
     int updateByPrimaryKey(NucDidaLogin record);

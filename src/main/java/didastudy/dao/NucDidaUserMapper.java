@@ -9,7 +9,9 @@ public interface NucDidaUserMapper {
 
     int insert(NucDidaUser record);
 
-    NucDidaUser selectByPrimaryKey(@Param("id") Long id, @Param("number") String number, @Param("phone") String phone);
+    NucDidaUser selectById(@Param("id") Long id);
+
+    NucDidaUser selectByNumber(@Param("number") String number);
 
     List<NucDidaUser> selectAll();
 

@@ -3,18 +3,16 @@ package didastudy.entity;
 import java.util.Date;
 import java.util.List;
 
-public class NucDidaRole {
+public class NucDidaPermission {
     private Long id;
 
     private Date gmtCreate;
 
     private Date gmtModified;
 
-    private String role;
+    private String permission;
 
-    private List<NucDidaUser> users;
-
-    private List<NucDidaPermission> permissions;
+    private List<NucDidaRole> roles;
 
     public Long getId() {
         return id;
@@ -40,27 +38,19 @@ public class NucDidaRole {
         this.gmtModified = gmtModified;
     }
 
-    public String getRole() {
-        return role;
+    public String getPermission() {
+        return permission;
     }
 
-    public void setRole(String role) {
-        this.role = role;
+    public void setPermission(String permission) {
+        this.permission = permission == null ? null : permission.trim();
     }
 
-    public List<NucDidaUser> getUsers() {
-        return users;
+    public List<NucDidaRole> getRoles() {
+        return roles;
     }
 
-    public void setUsers(List<NucDidaUser> users) {
-        this.users = users;
-    }
-
-    public List<NucDidaPermission> getPermissions() {
-        return permissions;
-    }
-
-    public void setPermissions(List<NucDidaPermission> permissions) {
-        this.permissions = permissions;
+    public void setRoles(List<NucDidaRole> roles) {
+        this.roles = roles;
     }
 }

@@ -9,6 +9,8 @@ public class NucDidaLogin {
 
     private String password;
 
+    private String salt;
+
     private Date gmtCreate;
 
     private Date gmtModified;
@@ -35,6 +37,14 @@ public class NucDidaLogin {
 
     public void setPassword(String password) {
         this.password = password == null ? null : password.trim();
+    }
+
+    public String getSalt() {
+        return salt;
+    }
+
+    public void setSalt(String salt) {
+        this.salt = salt;
     }
 
     public Date getGmtCreate() {

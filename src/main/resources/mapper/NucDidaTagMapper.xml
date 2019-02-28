@@ -15,13 +15,11 @@
     delete from nuc_dida_tag
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="didastudy.entity.NucDidaTag" >
-    insert into nuc_dida_tag (id, name, path, 
-      in_class, rank, gmt_create, 
-      gmt_modified, is_system)
-    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{path,jdbcType=VARCHAR}, 
-      #{inClass,jdbcType=INTEGER}, #{rank,jdbcType=INTEGER}, #{gmtCreate,jdbcType=TIMESTAMP}, 
-      #{gmtModified,jdbcType=TIMESTAMP}, #{isSystem,jdbcType=INTEGER})
+  <insert id="insert" parameterType="didastudy.entity.NucDidaTag" useGeneratedKeys="true" keyProperty="id">
+    insert into nuc_dida_tag (name, path,
+      in_class, rank, is_system)
+    values (#{name,jdbcType=VARCHAR}, #{path,jdbcType=VARCHAR},
+      #{inClass,jdbcType=INTEGER}, #{rank,jdbcType=INTEGER}, #{isSystem,jdbcType=INTEGER})
   </insert>
   <update id="updateByPrimaryKey" parameterType="didastudy.entity.NucDidaTag" >
     update nuc_dida_tag
@@ -34,10 +32,15 @@
       is_system = #{isSystem,jdbcType=INTEGER}
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+  <select id="selectById" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select id, name, path, in_class, rank, gmt_create, gmt_modified, is_system
     from nuc_dida_tag
     where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="selectByName" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select id, name, path, in_class, rank, gmt_create, gmt_modified, is_system
+    from nuc_dida_tag
+    where name = #{name,jdbcType=VARCHAR}
   </select>
   <select id="selectAll" resultMap="BaseResultMap" >
     select id, name, path, in_class, rank, gmt_create, gmt_modified, is_system

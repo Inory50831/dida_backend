@@ -21,6 +21,8 @@ public class NucDidaBlog {
 
     private Integer top;
 
+    private Integer status;
+
     public Long getId() {
         return id;
     }
@@ -91,5 +93,13 @@ public class NucDidaBlog {
 
     public void setTop(Integer top) {
         this.top = top;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 }

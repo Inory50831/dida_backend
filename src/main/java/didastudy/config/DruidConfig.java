@@ -29,7 +29,7 @@ public class DruidConfig {
         ServletRegistrationBean bean = new ServletRegistrationBean(new StatViewServlet(), "/druid/*");
         Map<String, String> initParams = new HashMap<>();
         initParams.put("loginUsername", "admin");
-        initParams.put("loginPassword", "nucdida");
+        initParams.put("loginPassword", "admin");
         initParams.put("allow", "");  //默认允许所有人访问
         initParams.put("deny", "");  //默认不禁止任何人访问
         bean.setInitParameters(initParams);

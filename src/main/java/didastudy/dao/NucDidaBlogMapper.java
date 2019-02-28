@@ -8,7 +8,11 @@ public interface NucDidaBlogMapper {
 
     int insert(NucDidaBlog record);
 
-    NucDidaBlog selectByPrimaryKey(Long id);
+    NucDidaBlog selectById(Long id);
+
+    NucDidaBlog selectByUserId(Long userId);
+
+    NucDidaBlog selectByTitle(String title);
 
     List<NucDidaBlog> selectAll();
 
