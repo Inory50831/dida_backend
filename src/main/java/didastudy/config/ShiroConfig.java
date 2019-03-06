@@ -2,7 +2,6 @@ package didastudy.config;
 
 import didastudy.shiro.JWTFilter;
 import didastudy.shiro.MyShiroRealm;
-import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.cache.ehcache.EhCacheManager;
 import org.apache.shiro.mgt.DefaultSessionStorageEvaluator;
 import org.apache.shiro.mgt.DefaultSubjectDAO;
