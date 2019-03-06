@@ -48,6 +48,7 @@ public class ShiroConfig {
         //注销操作不通过Filter
         filterChainDefinitionMap.put("/logout", "logout");
         //其余
+        //filterChainDefinitionMap.put("/system", "roles[2]");
         filterChainDefinitionMap.put("/**", "jwt");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
         return shiroFilterFactoryBean;

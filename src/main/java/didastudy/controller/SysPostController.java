@@ -6,6 +6,8 @@ import didastudy.util.CustomErrorType;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
+import org.apache.shiro.authz.annotation.RequiresAuthentication;
+import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +19,7 @@ import java.util.List;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
-@RequestMapping("/syspost")
+@RequestMapping("/system/syspost")
 @Api(value = "/syspost", description = "帖子管理")
 public class SysPostController {
 
@@ -27,6 +29,8 @@ public class SysPostController {
     private SysPostService sysPostService;
 
     @ApiOperation(value = "获取帖子信息列表", notes = "")
+    @RequiresAuthentication
+    @RequiresRoles("2")
     @GetMapping(value = "/post")
     public ResponseEntity<List<NucDidaPost>> getAllPost() {
         List<NucDidaPost> post = sysPostService.listPost();
@@ -38,6 +42,8 @@ public class SysPostController {
 
     @ApiOperation(value = "获取帖子信息(标题中关键字)", notes = "根据标题中关键字获取帖子信息")
     @ApiImplicitParam(name = "title", value = "博文标题", required = true, dataType = "String", paramType = "path")
+    @RequiresAuthentication
+    @RequiresRoles("2")
     @GetMapping(value = "/post/title/{title}")
     public ResponseEntity<?> getPostByTitle(@PathVariable("title") String title) {
         logger.info("Fetching Post with title {}", title);
@@ -52,6 +58,8 @@ public class SysPostController {
 
     @ApiOperation(value = "获取帖子信息(发帖人id)", notes = "根据发帖人ID获取帖子信息")
     @ApiImplicitParam(name = "user_id", value = "发帖人id", required = true, dataType = "Long", paramType = "path")
+    @RequiresAuthentication
+    @RequiresRoles("2")
     @GetMapping(value = "/post/user/{user_id}")
     public ResponseEntity<?> getPostById(@PathVariable("user_id") Long user_id) {
         logger.info("Fetching Post with userId {}", user_id);
@@ -66,6 +74,8 @@ public class SysPostController {
 
     @ApiOperation(value = "获取帖子信息(帖子id)", notes = "根据帖子ID获取帖子信息")
     @ApiImplicitParam(name = "id", value = "帖子id", required = true, dataType = "Long", paramType = "path")
+    @RequiresAuthentication
+    @RequiresRoles("2")
     @GetMapping(value = "/post/{id}")
     public ResponseEntity<?> getPostByUserId(@PathVariable("id") Long id) {
         logger.info("Fetching Post with id {}", id);
@@ -80,6 +90,8 @@ public class SysPostController {
 
     @ApiOperation(value = "封禁帖子", notes = "根据帖子id进行封禁")
     @ApiImplicitParam(name = "id", value = "帖子ID", required = true, dataType = "Long", paramType = "path")
+    @RequiresAuthentication
+    @RequiresRoles("2")
     @PutMapping(value = "/post/ban/{id}")
     public ResponseEntity<?> banPost(@PathVariable("id") Long id) {
         logger.info("Ban Post with id {}", id);
@@ -96,6 +108,8 @@ public class SysPostController {
 
     @ApiOperation(value = "置顶帖子", notes = "根据帖子id进行置顶")
     @ApiImplicitParam(name = "id", value = "帖子ID", required = true, dataType = "Long", paramType = "path")
+    @RequiresAuthentication
+    @RequiresRoles("2")
     @PutMapping(value = "/blog/top/{id}")
     public ResponseEntity<?> topBlog(@PathVariable("id") Long id) {
         logger.info("Top Post with id {}", id);

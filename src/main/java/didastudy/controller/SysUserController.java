@@ -8,6 +8,7 @@ import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.apache.shiro.authz.annotation.RequiresAuthentication;
+import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +22,7 @@ import java.util.List;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
-@RequestMapping(value = "/sysuser")
+@RequestMapping(value = "/system/sysuser")
 @Api(value = "/sysuser", description = "用户管理")
 public class SysUserController {
 
@@ -32,6 +33,7 @@ public class SysUserController {
 
     @ApiOperation(value = "获取用户信息列表", notes = "")
     @RequiresAuthentication
+    @RequiresRoles("2")
     @GetMapping(value = "/user")
     public ResponseEntity<List<NucDidaUser>> getAllUser() {
         List<NucDidaUser> users = sysUserService.listUser();
@@ -43,6 +45,8 @@ public class SysUserController {
 
     @ApiOperation(value = "获取用户信息", notes = "根据学号或职工号获取用户信息")
     @ApiImplicitParam(name = "number", value = "用户学号或职工号", required = true, dataType = "String", paramType = "path")
+    @RequiresAuthentication
+    @RequiresRoles("2")
     @GetMapping(value = "/user/{number}")
     public ResponseEntity<?> getUserByNumber(@PathVariable("number") String number) {
         logger.info("Fetching User with number {}", number);
@@ -60,6 +64,8 @@ public class SysUserController {
             @ApiImplicitParam(name = "id", value = "用户ID", required = true, dataType = "Long", paramType = "path"),
             @ApiImplicitParam(name = "user", value = "用户实体user", required = true, dataType = "NucDidaUser")
     })
+    @RequiresAuthentication
+    @RequiresRoles("2")
     @PutMapping(value = "/user/{id}")
     public ResponseEntity<?> updateUser(@PathVariable("id") Long id, @RequestBody NucDidaUser user) {
         logger.info("Updating User with id {}", id);
@@ -85,6 +91,8 @@ public class SysUserController {
 
     @ApiOperation(value = "添加用户", notes = "")
     @ApiImplicitParam(name = "user", value = "用户实体user", required = true, dataType = "NucDidaUser")
+    @RequiresAuthentication
+    @RequiresRoles("2")
     @PostMapping(value = "/user")
     public ResponseEntity<?> insertUser(@RequestBody NucDidaUser user, UriComponentsBuilder builder) {
         logger.info("Creating User: {}",user);
@@ -101,6 +109,8 @@ public class SysUserController {
 
     @ApiOperation(value = "封禁用户", notes = "根据用户id封禁")
     @ApiImplicitParam(name = "id", value = "用户id", required = true, dataType = "Long", paramType = "path")
+    @RequiresAuthentication
+    @RequiresRoles("2")
     @PutMapping(value = "/user/ban/{id}")
     public ResponseEntity<?> banUser(@PathVariable("id") Long id) {
         logger.info("Ban User with id {}", id);

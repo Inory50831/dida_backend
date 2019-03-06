@@ -38,9 +38,6 @@ public class NucDidaUser {
 
     private Integer type;
 
-
-    private List<NucDidaRole> roles;
-
     private Date gmtCreate;
 
     private Date gmtModified;
@@ -139,14 +136,6 @@ public class NucDidaUser {
 
     public void setType(Integer type) {
         this.type = type;
-    }
-
-    public List<NucDidaRole> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(List<NucDidaRole> roles) {
-        this.roles = roles;
     }
 
     public Date getGmtCreate() {

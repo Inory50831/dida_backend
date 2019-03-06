@@ -6,6 +6,8 @@ import didastudy.util.CustomErrorType;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
+import org.apache.shiro.authz.annotation.RequiresAuthentication;
+import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +21,7 @@ import java.util.List;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
-@RequestMapping("/systag")
+@RequestMapping("/system/systag")
 @Api(value = "/systag", description = "标签管理")
 public class SysTagController {
 
@@ -29,6 +31,8 @@ public class SysTagController {
     private SysTagService sysTagService;
 
     @ApiOperation(value = "获取标签信息列表", notes = "")
+    @RequiresAuthentication
+    @RequiresRoles("2")
     @GetMapping("/tag")
     public ResponseEntity<List<NucDidaTag>> getAllTag() {
         List<NucDidaTag> tag = sysTagService.getAllTag();
@@ -40,6 +44,8 @@ public class SysTagController {
 
     @ApiOperation(value = "获取标签信息", notes = "根据标签id获取标签信息")
     @ApiImplicitParam(name = "id", value = "标签ID", required = true, dataType = "Long", paramType = "path")
+    @RequiresAuthentication
+    @RequiresRoles("2")
     @GetMapping("/tag/{id}")
     public ResponseEntity<?> getTagById(@PathVariable("id") Long id) {
         logger.info("Fetching Tag with id {}", id);
@@ -54,6 +60,8 @@ public class SysTagController {
 
     @ApiOperation(value = "添加标签", notes = "")
     @ApiImplicitParam(name = "tag", value = "标签实体tag", required = true, dataType = "NucDidaTag")
+    @RequiresAuthentication
+    @RequiresRoles("2")
     @PostMapping("/tag")
     public ResponseEntity<?> insertTag(@RequestBody NucDidaTag tag, UriComponentsBuilder builder) {
         logger.info("Creating Tag: {}", tag);
@@ -70,6 +78,8 @@ public class SysTagController {
 
     @ApiOperation(value = "修改标签信息", notes = "根据标签id修改标签信息")
     @ApiImplicitParam(name = "id", value = "标签ID", required = true, dataType = "Long", paramType = "path")
+    @RequiresAuthentication
+    @RequiresRoles("2")
     @PutMapping("/tag/{id}")
     public ResponseEntity<?> updateTagById(@PathVariable("id") Long id, @RequestBody NucDidaTag tag) {
         logger.info("Updating Tag with id {}", id);
@@ -90,6 +100,8 @@ public class SysTagController {
 
     @ApiOperation(value = "删除标签", notes = "根据标签id删除标签")
     @ApiImplicitParam(name = "id", value = "标签ID", required = true, dataType = "Long", paramType = "path")
+    @RequiresAuthentication
+    @RequiresRoles("2")
     @DeleteMapping("/tag/{id}")
     public ResponseEntity<?> deleteTag(@PathVariable Long id) {
         logger.info("Deleting Tag with id {}", id);
