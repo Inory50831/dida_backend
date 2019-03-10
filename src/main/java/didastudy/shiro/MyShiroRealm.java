@@ -1,9 +1,8 @@
 package didastudy.shiro;
 
-import didastudy.entity.NucDidaLogin;
-import didastudy.entity.NucDidaPermission;
-import didastudy.entity.NucDidaRole;
-import didastudy.entity.NucDidaUser;
+import didastudy.entity.*;
+import didastudy.service.SysRoleService;
+import didastudy.service.SysUserService;
 import didastudy.service.UserLoginService;
 import didastudy.util.JWTUtil;
 import org.apache.shiro.authc.AuthenticationException;
@@ -24,6 +23,12 @@ public class MyShiroRealm extends AuthorizingRealm {
 
     @Autowired
     UserLoginService userLoginService;
+
+    @Autowired
+    SysUserService sysUserService;
+
+    @Autowired
+    SysRoleService sysRoleService;
 
     //JWT签名密钥
     public static final String SECRET = "admin";
@@ -65,16 +70,22 @@ public class MyShiroRealm extends AuthorizingRealm {
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
         logger.info("权限配置-->MyShiroRealm.doGetAuthorizationInfo()");
         String username = JWTUtil.getUsername(principals.toString());
-        NucDidaLogin login = userLoginService.getUserByNumber(username);
+        //NucDidaLogin login = userLoginService.getUserByNumber(username);
         SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
-        //设置对应角色的权限信息
-        NucDidaUser user = new NucDidaUser();
-        for(NucDidaRole role:user.getRoles()){
-            authorizationInfo.addRole(role.getRole());
-            for(NucDidaPermission p:role.getPermissions()){
-                authorizationInfo.addStringPermission(p.getPermission());
-            }
-        }
+        //NucDidaUser user = sysUserService.getUserByNumber(username);
+        //设置对应角色的权限信息(暂时按角色行使权限)
+        //Java 8 lamda
+        sysRoleService.getRoleByNumber(username).stream().forEach(
+                NucDidaRole ->{
+                    authorizationInfo.addRole(NucDidaRole.getRole());
+                }
+        );
+//        for(NucDidaRole role:user.getRoles()){
+//            authorizationInfo.addRole(role.getRole());
+//            for(NucDidaPermission p:role.getPermissions()){
+//                authorizationInfo.addStringPermission(p.getPermission());
+//            }
+//        }
         return authorizationInfo;
     }
 }

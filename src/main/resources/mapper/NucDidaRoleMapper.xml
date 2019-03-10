@@ -33,4 +33,15 @@
     select id, gmt_create, gmt_modified, role
     from nuc_dida_role
   </select>
+  <select id="selectByNumber" resultType="didastudy.entity.NucDidaRole" >
+    select nuc_dida_user.id, nuc_dida_user.number, nuc_dida_user.name, nuc_dida_user.college,
+    nuc_dida_user.phone, nuc_dida_user.email, nuc_dida_user.status, nuc_dida_user.message,
+    nuc_dida_user.background_image, nuc_dida_user.face, nuc_dida_user.qq, nuc_dida_user.type,
+    nuc_dida_user.gmt_create, nuc_dida_user.gmt_modified, nuc_dida_role.id, nuc_dida_role.role,
+    nuc_dida_role.gmt_create, nuc_dida_role.gmt_modified
+    from nuc_dida_user
+    right join nuc_dida_user_role on nuc_dida_user.id = nuc_dida_user_role.u_id
+    left join nuc_dida_role on nuc_dida_user_role.r_id = nuc_dida_role.id
+    where number = #{number,jdbcType=VARCHAR}
+  </select>
 </mapper>

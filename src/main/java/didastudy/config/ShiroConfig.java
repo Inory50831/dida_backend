@@ -2,7 +2,6 @@ package didastudy.config;
 
 import didastudy.shiro.JWTFilter;
 import didastudy.shiro.MyShiroRealm;
-import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.cache.ehcache.EhCacheManager;
 import org.apache.shiro.mgt.DefaultSessionStorageEvaluator;
 import org.apache.shiro.mgt.DefaultSubjectDAO;
@@ -48,6 +47,7 @@ public class ShiroConfig {
         //注销操作不通过Filter
         filterChainDefinitionMap.put("/logout", "logout");
         //其余
+        //filterChainDefinitionMap.put("/system", "roles[2]");
         filterChainDefinitionMap.put("/**", "jwt");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
         return shiroFilterFactoryBean;
